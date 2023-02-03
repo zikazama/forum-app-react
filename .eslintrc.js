@@ -5,12 +5,19 @@ module.exports = {
     node: true,
     jest: true
   },
-  extends: ['plugin:react/recommended', 'standard', 'plugin:storybook/recommended'],
-  overrides: [],
+  extends: [
+    'plugin:react/recommended',
+    'standard'
+  ],
+  overrides: [
+  ],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  plugins: ['react'],
-  rules: {}
-};
+  plugins: [
+    'react'
+  ],
+  rules: {
+  }
+}
