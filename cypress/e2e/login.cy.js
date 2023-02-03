@@ -15,14 +15,14 @@ describe('Login spec', () => {
 
   it('should display login page correctly', () => {
     // memverifikasi elemen yang harus tampak pada halaman login
-    cy.get('input[placeholder="email"]').should('be.visible')
-    cy.get('input[placeholder="password"]').should('be.visible')
-    cy.get('button').contains(/^Login$/).should('be.visible')
+    cy.get('[data-cy="email-input"]').should('be.visible')
+    cy.get('[data-cy="password-input"]').should('be.visible')
+    cy.get('[data-cy="submit-button"]').contains(/^Login$/).should('be.visible')
   })
 
   it('should display alert when email is empty', () => {
     // klik tombol login tanpa mengisi email
-    cy.get('button').contains(/^Login$/).click()
+    cy.get('[data-cy="submit-button"]').contains(/^Login$/).click()
 
     // memverifikasi log untuk menampilkan pesan dari API
     cy.on('log', (str) => {
@@ -32,10 +32,10 @@ describe('Login spec', () => {
 
   it('should display alert when password is empty', () => {
     // mengisi email
-    cy.get('input[placeholder="email"]').type('testuser@gmail.com')
+    cy.get('[data-cy="email-input"]').type('testuser@gmail.com')
 
     // klik tombol login tanpa mengisi password
-    cy.get('button').contains(/^Login$/).click()
+    cy.get('[data-cy="submit-button"]').contains(/^Login$/).click()
 
     // memverifikasi log untuk menampilkan pesan dari API
     cy.on('log', (str) => {
@@ -45,13 +45,13 @@ describe('Login spec', () => {
 
   it('should display alert when email and password are wrong', () => {
     // mengisi email
-    cy.get('input[placeholder="email"]').type('fauzi190198@gmail.com')
+    cy.get('[data-cy="email-input"]').type('fauzi190198@gmail.com')
 
     // mengisi password yang salah
-    cy.get('input[placeholder="password"]').type('wrong_password')
+    cy.get('[data-cy="password-input"]').type('wrong_password')
 
     // menekan tombol Login
-    cy.get('button').contains(/^Login$/).click()
+    cy.get('[data-cy="submit-button"]').contains(/^Login$/).click()
 
     // memverifikasi log untuk menampilkan pesan dari API
     cy.on('log', (str) => {
@@ -64,15 +64,15 @@ describe('Login spec', () => {
 
   it('should display homepage when email and password are correct', () => {
     // mengisi email
-    cy.get('input[placeholder="email"]').type('fauzi190198@gmail.com')
+    cy.get('[data-cy="email-input"]').type('fauzi190198@gmail.com')
 
     // mengisi password
-    cy.get('input[placeholder="password"]').type('123456')
+    cy.get('[data-cy="password-input"]').type('123456')
 
     // menekan tombol Login
-    cy.get('button').contains(/^Login$/).click()
+    cy.get('[data-cy="submit-button"]').contains(/^Login$/).click()
 
     // memverifikasi bahwa elemen yang berada di homepage ditampilkan
-    cy.get('button').contains('Posting').should('be.visible')
+    cy.get('[data-cy="posting-button"]').contains('Posting').should('be.visible')
   })
 })

@@ -45,33 +45,34 @@ export default function ThreadCard ({ isHome = false, thread = null, user = null
   } = useSelector((states) => states)
   const [statusUpVote, setStatusUpVote] = useState()
   const [statusDownVote, setStatusDownVote] = useState()
+  const actionComment = useState(false)
 
   useEffect(() => {
     thread.upVotesBy && setStatusUpVote(thread.upVotesBy.find((vote) => vote === authUser.id))
     thread.downVotesBy && setStatusDownVote(thread.downVotesBy.find((vote) => vote === authUser.id))
-  }, [thread, dispatch])
+  }, [thread, actionComment, dispatch])
 
-  const upVoteAction = () => {
-    isHome ? dispatch(asyncUpVoteThread(thread.id)) : dispatch(asyncUpVoteThreadDetail(thread.id))
+  const upVoteAction = async () => {
+    isHome ? await dispatch(asyncUpVoteThread(thread.id)) : await dispatch(asyncUpVoteThreadDetail(thread.id))
   }
 
-  const downVoteAction = () => {
-    isHome ? dispatch(asyncDownVoteThread(thread.id)) : dispatch(asyncDownVoteThreadDetail(thread.id))
+  const downVoteAction = async () => {
+    isHome ? await dispatch(asyncDownVoteThread(thread.id)) : await dispatch(asyncDownVoteThreadDetail(thread.id))
   }
 
-  const neutralAction = () => {
-    isHome ? dispatch(asyncNeutralVoteThread(thread.id)) : dispatch(asyncNeutralVoteThreadDetail(thread.id))
+  const neutralAction = async () => {
+    isHome ? await dispatch(asyncNeutralVoteThread(thread.id)) : await dispatch(asyncNeutralVoteThreadDetail(thread.id))
   }
 
-  const handleExpandClick = () => {
+  const handleExpandClick = async () => {
     setExpanded(!expanded)
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
     setContent('')
-    dispatch(asyncAddComment({ id: thread.id, content }))
-    dispatch(asyncReceiveThreadDetail(thread.id))
+    await dispatch(asyncAddComment({ id: thread.id, content }))
+    await dispatch(asyncReceiveThreadDetail(thread.id))
   }
 
   return (

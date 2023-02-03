@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { asyncReceiveThreadDetail } from '../states/threadDetail/action'
+import ProtectedRoute from '../components/ProtectedRoute'
 
 function Detail () {
   const navigate = useNavigate()
@@ -18,6 +19,7 @@ function Detail () {
   }, [threadId, dispatch])
 
   return (
+    <ProtectedRoute>
     <Layout>
       <Button onClick={(e) => navigate('/home')} variant="contained">
         Kembali
@@ -28,6 +30,7 @@ function Detail () {
         user={threadDetail.owner}
       /> }
     </Layout>
+    </ProtectedRoute>
   )
 }
 

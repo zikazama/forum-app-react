@@ -1,9 +1,9 @@
 /**
  * @TODO: Define all the actions (creator) for the authUser state
  */
+import { hideLoading, showLoading } from 'react-redux-loading-bar'
 import api from '../../utils/api'
 import Swal from 'sweetalert2'
-import { hideLoading, showLoading } from 'react-redux-loading-bar'
 
 const ActionType = {
   SET_LEADERBOARDS: 'SET_LEADERBOARDS'

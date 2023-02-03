@@ -8,27 +8,24 @@ import Grid from '@mui/material/Grid'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { asyncRegisterUser } from '../states/users/action'
 import RegisterInput from '../components/RegisterInput'
+import ProtectedRoute from '../components/ProtectedRoute'
 
 const theme = createTheme()
 
 export default function Register () {
-  const {
-    authUser
-  } = useSelector((states) => states)
   const navigate = useNavigate()
   const dispatch = useDispatch() // @TODO: get dispatch function from store
 
   const onRegister = ({ name, email, password }) => {
     dispatch(asyncRegisterUser({ name, email, password }))
-    if (authUser) {
-      navigate('/')
-    }
+    navigate('/')
   }
 
   return (
+    <ProtectedRoute unprotected={true}>
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
@@ -72,5 +69,6 @@ export default function Register () {
         </Grid>
       </Grid>
     </ThemeProvider>
+    </ProtectedRoute>
   )
 }
