@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from 'react'
 import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
@@ -43,7 +44,7 @@ function Layout ({ children }) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <MainAppBar setOpen={setOpen} open={open}/>
+      <MainAppBar style={{ zIndex: 1 }} setOpen={setOpen} open={open}/>
       <MainDrawer setOpen={setOpen} open={open} drawerHeader={DrawerHeader}/>
       <Main open={open}>
         <DrawerHeader />

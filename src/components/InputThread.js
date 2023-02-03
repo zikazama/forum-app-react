@@ -52,7 +52,7 @@ export default function InputThread () {
           value={body}
           onChange={onChangeBody}
         />
-        <Button type="submit" style={{ width: '100%' }} variant="contained">Posting</Button>
+        <Button data-cy="posting-button" type="submit" style={{ width: '100%' }} variant="contained">Posting</Button>
       </CardContent>
       </form>
     </Card>

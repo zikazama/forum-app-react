@@ -11,6 +11,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import LoginInput from '../components/LoginInput'
 import Box from '@mui/material/Box'
+import ProtectedRoute from '../components/ProtectedRoute'
 
 const theme = createTheme()
 
@@ -29,6 +30,7 @@ export default function Login () {
   }
 
   return (
+    <ProtectedRoute unprotected={true}>
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
@@ -72,5 +74,6 @@ export default function Login () {
         </Grid>
       </Grid>
     </ThemeProvider>
+    </ProtectedRoute>
   )
 }

@@ -1,11 +1,11 @@
 /**
  * @TODO: Define all the actions (creator) that uses a combination of actions from various domain
  */
+import { hideLoading, showLoading } from 'react-redux-loading-bar'
 import api from '../../utils/api'
 import Swal from 'sweetalert2'
 import { receiveThreadsActionCreator } from '../threads/action'
 import { receiveUsersActionCreator } from '../users/action'
-import { hideLoading, showLoading } from 'react-redux-loading-bar'
 
 function asyncPopulate () {
   return async (dispatch) => {

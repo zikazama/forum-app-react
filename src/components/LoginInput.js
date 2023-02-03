@@ -29,6 +29,7 @@ function LoginInput ({ onLogin }) {
                 autoComplete="email"
                 autoFocus
                 onChange={onEmailChange}
+                data-cy="email-input"
               />
               <TextField
                 margin="normal"
@@ -41,6 +42,7 @@ function LoginInput ({ onLogin }) {
                 placeholder='password'
                 autoComplete="current-password"
                 onChange={onPasswordChange}
+                data-cy="password-input"
               />
               <Button
               name="Login"
@@ -48,6 +50,7 @@ function LoginInput ({ onLogin }) {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                data-cy="submit-button"
               >
                 Login
               </Button>

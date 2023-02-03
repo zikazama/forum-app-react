@@ -28,19 +28,19 @@ export default function CommentCard ({ thread, comment }) {
     comment.downVotesBy && setStatusDownVote(comment.downVotesBy.find((vote) => vote === authUser.id))
   }, [comment])
 
-  const upVoteAction = () => {
-    dispatch(asyncUpVoteComment({ threadId: thread.id, commentId: comment.id }))
-    dispatch(asyncReceiveThreadDetail(thread.id))
+  const upVoteAction = async () => {
+    await dispatch(asyncUpVoteComment({ threadId: thread.id, commentId: comment.id }))
+    await dispatch(asyncReceiveThreadDetail(thread.id))
   }
 
-  const downVoteAction = () => {
-    dispatch(asyncDownVoteComment({ threadId: thread.id, commentId: comment.id }))
-    dispatch(asyncReceiveThreadDetail(thread.id))
+  const downVoteAction = async () => {
+    await dispatch(asyncDownVoteComment({ threadId: thread.id, commentId: comment.id }))
+    await dispatch(asyncReceiveThreadDetail(thread.id))
   }
 
-  const neutralAction = () => {
-    dispatch(asyncNeutralVoteComment({ threadId: thread.id, commentId: comment.id }))
-    dispatch(asyncReceiveThreadDetail(thread.id))
+  const neutralAction = async () => {
+    await dispatch(asyncNeutralVoteComment({ threadId: thread.id, commentId: comment.id }))
+    await dispatch(asyncReceiveThreadDetail(thread.id))
   }
 
   return (

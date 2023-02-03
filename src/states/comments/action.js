@@ -1,6 +1,7 @@
 /**
  * @TODO: Define all the actions (creator) for the comments state
  */
+import { hideLoading, showLoading } from 'react-redux-loading-bar'
 import api from '../../utils/api'
 import Swal from 'sweetalert2'
 
@@ -49,6 +50,7 @@ function NeutralVoteCommentActionCreator ({ threadId, commentId, userId }) {
 
 function asyncAddComment ({ id, content }) {
   return async (dispatch) => {
+    dispatch(showLoading())
     try {
       const comment = await api.createComment({ id, content })
       dispatch(addCommentActionCreator(comment))
@@ -59,11 +61,13 @@ function asyncAddComment ({ id, content }) {
         text: error.message
       })
     }
+    dispatch(hideLoading())
   }
 }
 
 function asyncUpVoteComment ({ threadId, commentId }) {
   return async (dispatch, getState) => {
+    dispatch(showLoading())
     const { authUser } = getState()
     dispatch(UpVoteCommentActionCreator({ threadId, commentId, userId: authUser.id }))
 
@@ -77,11 +81,14 @@ function asyncUpVoteComment ({ threadId, commentId }) {
       })
       dispatch(UpVoteCommentActionCreator({ threadId, commentId, userId: authUser.id }))
     }
+
+    dispatch(hideLoading())
   }
 }
 
 function asyncDownVoteComment ({ threadId, commentId }) {
   return async (dispatch, getState) => {
+    dispatch(showLoading())
     const { authUser } = getState()
     dispatch(DownVoteCommentActionCreator({ threadId, commentId, userId: authUser.id }))
 
@@ -95,11 +102,15 @@ function asyncDownVoteComment ({ threadId, commentId }) {
       })
       dispatch(DownVoteCommentActionCreator({ threadId, commentId, userId: authUser.id }))
     }
+
+    dispatch(hideLoading())
   }
 }
 
 function asyncNeutralVoteComment ({ threadId, commentId }) {
   return async (dispatch, getState) => {
+    dispatch(showLoading())
+
     const { authUser } = getState()
     dispatch(NeutralVoteCommentActionCreator({ threadId, commentId, userId: authUser.id }))
 
@@ -113,6 +124,8 @@ function asyncNeutralVoteComment ({ threadId, commentId }) {
       })
       dispatch(NeutralVoteCommentActionCreator({ threadId, commentId, userId: authUser.id }))
     }
+
+    dispatch(hideLoading())
   }
 }
 

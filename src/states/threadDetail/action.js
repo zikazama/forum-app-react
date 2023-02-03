@@ -1,6 +1,7 @@
 /**
  * @TODO: Define all the actions (creator) for the talkDetail state
  */
+import { hideLoading, showLoading } from 'react-redux-loading-bar'
 import api from '../../utils/api'
 import Swal from 'sweetalert2'
 
@@ -56,6 +57,8 @@ function NeutralVoteThreadDetailActionCreator (userId) {
 
 function asyncReceiveThreadDetail (id) {
   return async (dispatch) => {
+    dispatch(showLoading())
+
     try {
       const threadDetail = await api.seeDetailThread({ id })
       dispatch(receiveThreadDetailActionCreator(threadDetail))
@@ -66,11 +69,14 @@ function asyncReceiveThreadDetail (id) {
         text: error.message
       })
     }
+
+    dispatch(hideLoading())
   }
 }
 
 function asyncUpVoteThreadDetail () {
   return async (dispatch, getState) => {
+    dispatch(showLoading())
     const { authUser, threadDetail } = getState()
     dispatch(UpVoteThreadDetailActionCreator(authUser.id))
 
@@ -83,11 +89,15 @@ function asyncUpVoteThreadDetail () {
         text: error.message
       })
     }
+
+    dispatch(hideLoading())
   }
 }
 
 function asyncDownVoteThreadDetail () {
   return async (dispatch, getState) => {
+    dispatch(showLoading())
+
     const { authUser, threadDetail } = getState()
     dispatch(DownVoteThreadDetailActionCreator(authUser.id))
 
@@ -100,11 +110,15 @@ function asyncDownVoteThreadDetail () {
         text: error.message
       })
     }
+
+    dispatch(hideLoading())
   }
 }
 
 function asyncNeutralVoteThreadDetail () {
   return async (dispatch, getState) => {
+    dispatch(showLoading())
+
     const { authUser, threadDetail } = getState()
     dispatch(NeutralVoteThreadDetailActionCreator(authUser.id))
 
@@ -117,6 +131,8 @@ function asyncNeutralVoteThreadDetail () {
         text: error.message
       })
     }
+
+    dispatch(hideLoading())
   }
 }
 
